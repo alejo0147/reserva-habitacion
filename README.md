@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # hotel-App
 
 Este proyecto fue generado con Angular CLI versión 17.3.0.
