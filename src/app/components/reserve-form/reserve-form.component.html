@@ -1,0 +1,83 @@
+<div class="card">
+  <div class="card-content">
+    <div class="card-header">
+      <h5 class="card-title">{{(reser.id > 0) ? 'Editar' : 'Crear'}} Reserva</h5>
+    </div>
+    <div class="card-body">
+      <form (ngSubmit)="onSubmit(reservationForm)" #reservationForm="ngForm">
+        <div class="row">
+          <!-- Fecha de inicio -->
+          <div class="col-md-6 col-sm-12 mb-3">
+            <input placeholder="DateStart" name="dateStart" [(ngModel)]="reser.dateStart"
+                  class="form-control" type="date" required dateStart #dateStart="ngModel">
+            @if (dateStart.invalid && (dateStart.dirty || dateStart.touched)) {
+              @if(dateStart.errors!['required']){
+                <div class="text-danger">La fecha inicial es requerida</div>
+              }
+              @if(dateStart.errors!['dateStart']){
+                <div class="text-danger">La fecha inicial no tiene formato correcto</div>
+              }
+            }
+          </div>
+
+          <!-- Fecha de finalización -->
+          <div class="col-md-6 col-sm-12 mb-3">
+            <input placeholder="DateEnd" name="dateEnd" [(ngModel)]="reser.dateEnd"
+                  class="form-control" type="date" required dateEnd #dateEnd="ngModel">
+            @if (dateEnd.invalid && (dateEnd.dirty || dateEnd.touched)) {
+              @if(dateEnd.errors!['required']){
+                <div class="text-danger">La fecha final es requerida</div>
+              }
+              @if(dateEnd.errors!['dateEnd']){
+                <div class="text-danger">La fecha final no tiene formato correcto</div>
+              }
+            }
+          </div>
+        </div>
+
+        <div class="row">
+          <!-- Cliente -->
+          <div class="col-md-6 col-sm-12 mb-3">
+            <input placeholder="Client" name="clientID" type="number"
+                  [(ngModel)]="reser.client" class="form-control" required minlength="1" #clientID="ngModel">
+            @if (clientID.invalid && (clientID.dirty || clientID.touched)) {
+              @if(clientID.errors!['required']){
+                <div class="text-danger">El cliente es requerido</div>
+              }
+              @if(clientID.errors!['minlength']){
+                <div class="text-danger">El cliente debe tener al menos 1 carácter</div>
+              }
+            }
+          </div>
+
+          <!-- Servicio -->
+          <div class="col-md-6 col-sm-12 mb-3">
+            <input placeholder="Service" name="serviceID" type="number"
+                  [(ngModel)]="reser.service" class="form-control" required minlength="1" #serviceID="ngModel">
+            @if (serviceID.invalid && (serviceID.dirty || serviceID.touched)) {
+              @if(serviceID.errors!['required']){
+                <div class="text-danger">El servicio es requerido</div>
+              }
+              @if(serviceID.errors!['minlength']){
+                <div class="text-danger">El servicio debe tener al menos 1 carácter</div>
+              }
+            }
+          </div>
+        </div>
+
+        <!-- Botones -->
+        <div class="row">
+          <div class="col-12 d-flex justify-content-between">
+            <button type="submit" class="btn btn-outline-primary" [disabled]="reservationForm.invalid">
+              {{(reser.id > 0) ? 'Editar' : 'Crear'}}
+            </button>
+
+            <button type="button" class="btn btn-outline-secondary" (click)="onClear(reservationForm)">
+              Limpiar
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
