@@ -10,6 +10,12 @@ export class SharingDataRService {
 
   private _idReservationEventEmitter = new EventEmitter();
 
+  private _findReservationByIdEventEmitter = new EventEmitter();
+
+  private _selectReservationEventEmitter = new EventEmitter();
+
+  private _selectClientEventEmitter = new EventEmitter();
+
   constructor() { }
 
   get newReservationEventEmitter(): EventEmitter<Reservation> {
@@ -18,6 +24,18 @@ export class SharingDataRService {
 
   get idReservationEventEmitter(): EventEmitter<number>{
     return this._idReservationEventEmitter;
+  }
+
+  get selectReservationEventEmitter() {
+    return this._selectReservationEventEmitter;
+  }
+
+  get selectClientEventEmitter() {
+    return this._selectClientEventEmitter;
+  }
+
+  get findReservationByIdEventEmitter() {
+    return this._findReservationByIdEventEmitter
   }
 
 }

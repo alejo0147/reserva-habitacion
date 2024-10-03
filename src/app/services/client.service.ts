@@ -1,26 +1,24 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Client } from '../models/client';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClientService {
 
-  private client: Client[] = [{
-    id: 1,
-    fullName: 'Alejandro Parias Moreno',
-    email: 'alejandroparmo@mail.com',
-  },
-  {
-    id: 2,
-    fullName: 'Adriana Maria Moreno',
-    email: 'adrimoreno@mail.com',
-  }];
+  private client: Client[] = [];
 
-  constructor() { }
+  private url: string = 'http://localhost:8009/client';
+
+  constructor(private http: HttpClient) { }
 
   findAll(): Observable<Client[]> {
-    return of(this.client);
+    return this.http.get<Client[]>(this.url);
+  }
+
+  findById(id: number): Observable<Client>{
+    return this.http.get<Client>(`${this.url}/${id}`);
   }
 }
